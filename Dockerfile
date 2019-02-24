@@ -1,4 +1,6 @@
-FROM walser/alpine:latest
+FROM alpine:latest
 
 # install needed packages
-RUN apk add --no-cache python3
+RUN apk add --no-cache bash
+RUN apk add --no-cache bash-completion
+RUN apk add --no-cache ca-certificates
