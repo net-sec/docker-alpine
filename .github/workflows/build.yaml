@@ -1,8 +1,16 @@
 name: Build
 on:
-  workflow_dispatch:
-    inputs:
-      phase:
-        description: 'Phase to deploy'
-        required: true
-        default: prd
+  push:
+    branches: [ main ]
+  workflow_dispatch: {}
+
+
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Test
+        run: |
+          echo "hello world"
