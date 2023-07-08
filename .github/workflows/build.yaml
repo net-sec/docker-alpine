@@ -1,0 +1,8 @@
+name: Build
+on:
+  workflow_dispatch:
+    inputs:
+      phase:
+        description: 'Phase to deploy'
+        required: true
+        default: prd
