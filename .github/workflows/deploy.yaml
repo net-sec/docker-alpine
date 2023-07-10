@@ -10,7 +10,7 @@ jobs:
       - name: Buildah Build
         uses: redhat-actions/buildah-build@v2
         with:
-          image: alpine
+          image: ${{ secrets.QUAY_REGISTRY }}/alpine
           tags: latest
           containerfiles: |
             ./Dockerfile
@@ -31,6 +31,6 @@ jobs:
 #        with:
 #          image: alpine
 #          tags: latest
-#          registry: ${{ secrets.QUAY_REGISTRY }}
-#          username: ${{ secrets.QUAY_REGISTRY_USER }}
+#          registry: ${{ secrets.QUAY_REGISTRY }} #quay.io/net-sec
+#          username: ${{ secrets.QUAY_REGISTRY_USER }} #claudio_walser
 #          password: ${{ secrets.QUAY_REGISTRY_PASSWORD }}
