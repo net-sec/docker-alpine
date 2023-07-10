@@ -1,0 +1,17 @@
+name: Deploy
+on:
+  push:
+    branches: [ main, master ]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Buildah Action
+        uses: redhat-actions/buildah-build@v2
+        with:
+          image: docker-alpine
+          tags: latest
+          containerfiles: |
+            ./Dockerfile
