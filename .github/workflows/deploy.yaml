@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Buildah Action
+      - name: Buildah Build
         uses: redhat-actions/buildah-build@v2
         with:
           image: docker-alpine
