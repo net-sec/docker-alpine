@@ -14,18 +14,11 @@ jobs:
           tags: latest
           containerfiles: |
             ./Dockerfile
-      - name: confirm
-        run: |
-          echo "Docker:";
-          docker image ls;
-          echo "Podman:";
-          podman image ls;
-#      - name: Push To quay.io
-#        id: push-to-quay
-#        uses: redhat-actions/push-to-registry@v2
-#        with:
-#          image: alpine
-#          tags: latest
-#          registry: ${{ secrets.QUAY_REGISTRY }} #quay.io/net-sec
-#          username: ${{ secrets.QUAY_REGISTRY_USER }} #claudio_walser
-#          password: ${{ secrets.QUAY_REGISTRY_PASSWORD }}
+      - name: Push To quay.io
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          image: alpine
+          tags: latest
+          registry: ${{ secrets.QUAY_REGISTRY }} #quay.io/net-sec
+          username: ${{ secrets.QUAY_REGISTRY_USER }} #claudio_walser
+          password: ${{ secrets.QUAY_REGISTRY_PASSWORD }}
