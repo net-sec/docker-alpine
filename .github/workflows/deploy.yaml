@@ -3,7 +3,7 @@ on:
   push:
     branches: [ main, master ]
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -11,7 +11,21 @@ jobs:
       - name: Buildah Build
         uses: redhat-actions/buildah-build@v2
         with:
-          image: docker-alpine
+          image: alpine
           tags: latest
           containerfiles: |
             ./Dockerfile
+
+  push:
+    runs-on: ubuntu-latest
+    # Podman Login action (https://github.com/redhat-actions/podman-login) also be used to log in,
+    # in which case 'username' and 'password' can be omitted.
+    - name: Push To quay.io
+      id: push-to-quay
+      uses: redhat-actions/push-to-registry@v2
+      with:
+        image: alpine
+        tags: latest
+        registry: ${{ secrets.QUAY_REGISTRY }} #quay.io/net-sec
+        username: ${{ secrets.QUAY_REGISTRY_USER }} #claudio_walser
+        password: ${{ secrets.QUAY_REGISTRY_PASSWORD }} # API_KEY
