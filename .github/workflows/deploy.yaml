@@ -10,16 +10,32 @@ jobs:
       - name: Buildah Build
         uses: redhat-actions/buildah-build@v2
         with:
-          image: ${{ secrets.QUAY_REGISTRY }}/alpine
+          image: local-alpine
           tags: latest
           containerfiles: |
             ./Dockerfile
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: local-alpine
+          path: /tmp/local-alpine.tar
+
   push:
     runs-on: ubuntu-latest
     # Podman Login action (https://github.com/redhat-actions/podman-login) also be used to log in,
     # in which case 'username' and 'password' can be omitted.
     needs: build
     steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: local-alpine
+          path: /tmp
+      - name: Load image
+        run: |
+          podman load --input /tmp/local-alpine.tar
+          podman image ls -a
+
       - name: confirm
         run: |
           echo "Docker:";
