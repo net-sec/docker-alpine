@@ -25,7 +25,7 @@ jobs:
       - name: Push To quay.io
         uses: redhat-actions/push-to-registry@v2
         with:
-          image: ${{ vars.QUAY_REGISTRY }}/alpine
+          image: alpine
           tags: latest
           registry: ${{ vars.QUAY_REGISTRY }} #quay.io/net-sec
           username: ${{ vars.QUAY_REGISTRY_USER }} #claudio_walser
