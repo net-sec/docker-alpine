@@ -18,15 +18,15 @@ jobs:
       - name: Buildah Build
         uses: redhat-actions/buildah-build@v2
         with:
-          image: $QUAY_REGISTRY/alpine
+          image: ${{ vars.QUAY_REGISTRY }}/alpine
           tags: latest
           containerfiles: |
             ./Dockerfile
       - name: Push To quay.io
         uses: redhat-actions/push-to-registry@v2
         with:
-          image: ${{ QUAY_REGISTRY }}/alpine
+          image: ${{ vars.QUAY_REGISTRY }}/alpine
           tags: latest
-          registry: $QUAY_REGISTRY #quay.io/net-sec
-          username: $QUAY_REGISTRY_USER #claudio_walser
+          registry: ${{ vars.QUAY_REGISTRY }} #quay.io/net-sec
+          username: ${{ vars.QUAY_REGISTRY_USER }} #claudio_walser
           password: ${{ secrets.QUAY_REGISTRY_PASSWORD }}
