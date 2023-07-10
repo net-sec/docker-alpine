@@ -1,7 +1,7 @@
-name: Push
-on:
-  workflow_run:
-    workflows: ["Build"]
-    branches: [main]
-    types: 
-      - completed
+#name: Push
+#on:
+#  workflow_run:
+#    workflows: ["Build"]
+#    branches: [main]
+#    types:
+#      - completed
