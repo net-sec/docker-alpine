@@ -36,7 +36,7 @@ jobs:
       - name: Dispatch python build
         uses: peter-evans/repository-dispatch@v1
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GLOBAL_GITHUB_ACCESS_TOKEN }}
           repository: net-sec/docker-python
           event-type: trigger-container-build
 
