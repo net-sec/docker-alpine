@@ -3,6 +3,10 @@ on:
   push:
     branches: [ main ]
 
+  # schedule once a week
+  schedule:
+    - cron: '00 12 * * 1'
+
 jobs:
 
   build-and-push:
