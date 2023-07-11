@@ -2,7 +2,7 @@ name: Trigger Python Image Build
 on:
   push:
     branches: [ main ]
-  needs: Deploy
+needs: Deploy
 jobs:
 
   build-and-push:
