@@ -26,6 +26,9 @@ jobs:
           password: ${{ secrets.QUAY_REGISTRY_PASSWORD }}
 
 
+
+
+  # trigger https://github.com/net-sec/docker-python/actions/workflows/deploy.yaml
   trigger-python-build:
     runs-on: ubuntu-latest
     needs: build-and-push
@@ -33,30 +36,32 @@ jobs:
       - name: Dispatch python build
         uses: peter-evans/repository-dispatch@v1
         with:
-          token: ${{ secrets.GLOBAL_GITHUB_ACCESS_TOKEN }}
+          token: ${{ secrets.GITHUB_ACCESS_TOKEN }}
           repository: net-sec/docker-python
           event-type: trigger-container-build
 
 
-  trigger-dnssec-build:
-    runs-on: ubuntu-latest
-    needs: build-and-push
-    steps:
-      - name: Dispatch dnssec build
-        uses: peter-evans/repository-dispatch@v1
-        with:
-          token: ${{ secrets.GLOBAL_GITHUB_ACCESS_TOKEN }}
-          repository: net-sec/docker-dnssec
-          event-type: trigger-container-build
+  # # trigger https://github.com/net-sec/docker-dnssec/actions/workflows/deploy.yaml
+  # trigger-dnssec-build:
+  #   runs-on: ubuntu-latest
+  #   needs: build-and-push
+  #   steps:
+  #     - name: Dispatch dnssec build
+  #       uses: peter-evans/repository-dispatch@v1
+  #       with:
+  #         token: ${{ secrets.GITHUB_ACCESS_TOKEN }}
+  #         repository: net-sec/docker-dnssec
+  #         event-type: trigger-container-build
 
 
-  trigger-keepalived-build:
-    runs-on: ubuntu-latest
-    needs: build-and-push
-    steps:
-      - name: Dispatch keepalived build
-        uses: peter-evans/repository-dispatch@v1
-        with:
-          token: ${{ secrets.GITHUB_ACCESS_TOKEN }}
-          repository: net-sec/docker-keepalived
-          event-type: trigger-container-build
+  # # trigger https://github.com/net-sec/docker-keepalived/actions/workflows/deploy.yaml
+  # trigger-keepalived-build:
+  #   runs-on: ubuntu-latest
+  #   needs: build-and-push
+  #   steps:
+  #     - name: Dispatch keepalived build
+  #       uses: peter-evans/repository-dispatch@v1
+  #       with:
+  #         token: ${{ secrets.GITHUB_ACCESS_TOKEN }}
+  #         repository: net-sec/docker-keepalived
+  #         event-type: trigger-container-build
