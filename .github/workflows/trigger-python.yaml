@@ -1,0 +1,16 @@
+name: Trigger Python Image Build
+on:
+  push:
+    branches: [ main ]
+  needs: Deploy
+jobs:
+
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch python build
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          token: ${{ secrets.GLOBAL_GITHUB_ACCESS_TOKEN }}
+          repository: net-sec/docker-python
+          event-type: trigger-container-build

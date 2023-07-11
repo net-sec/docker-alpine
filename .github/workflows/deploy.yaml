@@ -1,32 +1,26 @@
 name: Deploy
 on:
   push:
-    branches: [ main, master ]
+    branches: [ main ]
 jobs:
-  debug:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Debug
-        run: echo $BUILD_CONFIGURATION
-
 
   build-and-push:
     runs-on: ubuntu-latest
-    needs: debug
+    # needs: debug
     steps:
       - uses: actions/checkout@v3
       - name: Buildah Build
         uses: redhat-actions/buildah-build@v2
         with:
-          image: ${{ vars.QUAY_REGISTRY }}/alpine
+          image: ${{ vars.QUAY_REPO }}/alpine
           tags: latest
           containerfiles: |
             ./Dockerfile
       - name: Push To quay.io
         uses: redhat-actions/push-to-registry@v2
         with:
-          image: alpine
+          image: ${{ vars.QUAY_REPO }}/alpine
           tags: latest
-          registry: ${{ vars.QUAY_REGISTRY }} #quay.io/net-sec
-          username: ${{ vars.QUAY_REGISTRY_USER }} #claudio_walser
+          registry: ${{ vars.QUAY_REGISTRY }}
+          username: ${{ vars.QUAY_REGISTRY_USER }}
           password: ${{ secrets.QUAY_REGISTRY_PASSWORD }}
